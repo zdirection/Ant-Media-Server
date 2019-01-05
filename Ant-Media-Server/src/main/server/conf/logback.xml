@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<configuration>
+    <appender class="ch.qos.logback.core.ConsoleAppender" name="CONSOLE">
+        <encoder>
+            <pattern>[%p] [%thread] %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="FILE">
+        <File>log/ant-media-server.log</File>
+        <Append>false</Append>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+          <fileNamePattern>log/ant-media-server.%i.log.gz</fileNamePattern>
+          <minIndex>1</minIndex>
+          <maxIndex>2</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+          <maxFileSize>500MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>%d{ISO8601} [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="FILE" />
+    </root>
+    <logger name="org.springframework" level="INFO" />
+    <logger name="org.springframework.scheduling" level="WARN" />
+    <logger name="org.apache" level="INFO" />
+    <logger name="org.apache.jasper.servlet" level="WARN" />
+    <logger name="ch.qos" level="WARN" />
+    <logger name="com.antstreaming" level="DEBUG"/>
+    <logger name="org.quartz" level="WARN"/>
+    <logger name="org.apache.catalina.core.ApplicationContext" level="WARN" />
+</configuration>
